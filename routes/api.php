@@ -19,10 +19,13 @@ Route::group(
         'prefix' => 'v1'
     ],
     function () {
-        Route::get('login', 'AuthController@login');
-//        Route::post('register', function (Request $request) {
-//            dd(212);
-//        });
-        Route::post('register', 'AuthController@register');
+        Route::group([],
+            function () {
+                Route::post('login', 'AuthController@login');
+                Route::post('register', 'AuthController@register');
+                Route::post('password-reset', 'AuthController@sendResetPasswordToken');
+                Route::put('password-reset', 'AuthController@resetPassword');
+            }
+        );
     }
 );

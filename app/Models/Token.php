@@ -2,20 +2,21 @@
 
 namespace App\Models;
 
+
 use App\Traits\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Token extends Model
 {
     use ModelTrait;
 
-    protected $table = 'users';
+    protected $table = 'tokens';
     protected $guarded = ['id'];
 
     public $timestamps = true;
 
-    public function token()
+    public function user()
     {
-        return $this->hasOne(Token::class);
+        return $this->belongsTo(User::class);
     }
 }

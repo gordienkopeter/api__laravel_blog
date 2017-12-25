@@ -3,11 +3,21 @@
 namespace App\Services;
 
 use App\Interfaces\IUserService;
+use App\Models\Token;
 use App\Models\User;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Str;
 
 class UserService implements IUserService
 {
-    public function userByLoginOrEmail(string $login): User
+    protected $tokenService;
+
+    public function __construct(TokenService $tokenService)
+    {
+        $this->tokenService = $tokenService;
+    }
+
+    public function userByLoginOrEmail(string $login)
     {
         return User::where('login', $login)
             ->orWhere('email', $login)
@@ -16,7 +26,7 @@ class UserService implements IUserService
 
     public function create(array $data): User
     {
-        $salt = str_random(33);
+        $salt = Str::random(33);
 
         return User::create([
             'login' => array_get($data, 'login'),
@@ -24,10 +34,7 @@ class UserService implements IUserService
             'first_name' => array_get($data, 'first_name'),
             'last_name' => array_get($data, 'last_name'),
             'password' => $this->preparePasswordBySalt($salt, array_get($data, 'password')),
-            'salt' => $salt,
-            'access_token' => '',
-            'access_token' => '',
-            'access_token' => '',
+            'salt' => Crypt::encryptString($salt)
         ]);
     }
 
@@ -37,9 +44,16 @@ class UserService implements IUserService
             ->first();
     }
 
+    public function userByToken(string $token): User
+    {
+        return $this->tokenService
+            ->find($token)
+            ->user;
+    }
+
     public function preparePassword(User $user, string $password): string
     {
-        return sha1($user->salt . sha1($password));
+        return sha1(Crypt::decryptString($user->salt) . sha1($password));
     }
 
     public function preparePasswordBySalt(string $salt, string $password): string

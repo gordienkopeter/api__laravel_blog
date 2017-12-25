@@ -15,7 +15,9 @@ class AuthResource extends Resource
     public function toArray($request)
     {
         return [
-            'access_token' => $this->access_token
+            'access_token' => $this->access_token,
+            'refresh_token' => $this->refresh_token,
+            'expire_token' => $this->expire_token,
         ];
     }
 }

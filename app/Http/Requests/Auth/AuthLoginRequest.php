@@ -26,6 +26,7 @@ class AuthLoginRequest extends FormRequest
     {
         Validator::extend('authorize.login', '\App\Validators\AuthValidator@authorizeLoginRule');
         Validator::replacer('authorize.login', '\App\Validators\AuthValidator@authorizeLoginMessage');
+
         Validator::extend('authorize.password', '\App\Validators\AuthValidator@authorizePasswordRule');
         Validator::replacer('authorize.password', '\App\Validators\AuthValidator@authorizePasswordMessage');
 
