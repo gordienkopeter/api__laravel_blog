@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,16 +14,30 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(
+    [],
+    function () {
+        Route::post('login', 'AuthController@login');
+        Route::post('register', 'AuthController@register');
+
+        Route::post('refresh-token', 'AuthController@refreshToken');
+
+        Route::post('password-reset', 'AuthController@sendResetPasswordToken');
+        Route::put('password-reset', 'AuthController@resetPassword');
+    }
+);
+
+Route::group(
     [
+        'middleware' => ['auth'],
         'prefix' => 'v1'
     ],
     function () {
-        Route::group([],
+        Route::group(
+            [
+                'prefix' => 'posts'
+            ],
             function () {
-                Route::post('login', 'AuthController@login');
-                Route::post('register', 'AuthController@register');
-                Route::post('password-reset', 'AuthController@sendResetPasswordToken');
-                Route::put('password-reset', 'AuthController@resetPassword');
+                Route::get('', 'PostController@all');
             }
         );
     }
