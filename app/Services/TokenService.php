@@ -23,10 +23,10 @@ class TokenService
     public function generateExpireToken(): string
     {
        return date(
-           'Y-n-j G:i:00',
+           'Y-n-j G:i',
            mktime(
                date('G'),
-               date('i') + 10,
+               date('i') + env('AUTH_EXPIRED'),
                0,
                date('m'),
                date('d'),

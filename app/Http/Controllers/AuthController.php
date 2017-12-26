@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Auth\AuthRefreshTokenRequest;
 use App\Http\Requests\Auth\AuthRegisterRequest;
 use App\Http\Requests\Auth\AuthLoginRequest;
 use App\Http\Resources\AuthResource;
@@ -37,5 +38,10 @@ class AuthController extends Controller
         $token = $user->token()->create($this->tokenService->generateTokens());
 
         return new AuthResource($token);
+    }
+
+    public function refreshToken(AuthRefreshTokenRequest $request)
+    {
+
     }
 }

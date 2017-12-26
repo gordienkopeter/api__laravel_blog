@@ -19,4 +19,9 @@ class Token extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getExpireTokenAttribute($value)
+    {
+        return time($value) * 1000;
+    }
 }

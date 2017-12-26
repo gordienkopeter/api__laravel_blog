@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -11,6 +12,6 @@ class PostController extends Controller
 
     public function all()
     {
-        dd(213232);
+        dd(Auth::user());
     }
 }
