@@ -2,7 +2,9 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\Constants\ValidationBaseErrorConstants;
 use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
 
@@ -58,5 +60,16 @@ class Handler extends ExceptionHandler
             'error' => $exception->getError(),
             'error_description' => $exception->errors(),
         ], $exception->status);
+    }
+
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        return response()->json(
+            [
+                'error' => ValidationBaseErrorConstants::INVALID_CLIENT,
+                'error_description' => $exception->getMessage(),
+            ],
+            401
+        );
     }
 }

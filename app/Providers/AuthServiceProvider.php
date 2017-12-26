@@ -25,9 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app['auth']->viaRequest('userAuth', function (Request $request) {
-            if ($request->bearerToken()) {
+            if ($bearerToken = $request->bearerToken()) {
                 return app('App\Services\UserService')
-                    ->userByToken($request->bearerToken());
+                    ->userByToken($bearerToken);
             }
         });
 

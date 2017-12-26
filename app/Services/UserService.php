@@ -38,17 +38,17 @@ class UserService implements IUserService
         ]);
     }
 
-    public function show(int $id): User
+    public function show(int $id)
     {
         return User::where('id', $id)
             ->first();
     }
 
-    public function userByToken(string $token): User
+    public function userByToken(string $token)
     {
-        return $this->tokenService
-            ->find($token)
-            ->user;
+        $model = $this->tokenService->find($token);
+
+        return $model ? $model->user : null;
     }
 
     public function preparePassword(User $user, string $password): string

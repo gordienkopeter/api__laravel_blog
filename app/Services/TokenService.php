@@ -50,17 +50,22 @@ class TokenService
             ->first();
     }
 
-    public function find(string $token): Token
+    public function find(string $token)
     {
         return Token::where('access_token', $token)
             ->first();
     }
 
-    public function refreshToken(string $refresh_token): Token
+    public function refreshToken(string $refresh_token)
     {
         $token = Token::where('refresh_token', $refresh_token)->first();
         $token->update($this->generateTokens());
 
         return $token;
+    }
+
+    public function existToken(string $token): bool
+    {
+        return (bool)$this->find($token);
     }
 }
