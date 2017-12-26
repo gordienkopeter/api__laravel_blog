@@ -2,11 +2,14 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Traits\FailedValidationBaseTrait;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AuthLoginRequest extends FormRequest
 {
+    use FailedValidationBaseTrait;
+
     /**
      * Determine if the user is authorized to make this request.
      *

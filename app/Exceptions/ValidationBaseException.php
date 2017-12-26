@@ -6,10 +6,19 @@ use Illuminate\Validation\ValidationException;
 
 class ValidationBaseException extends ValidationException
 {
-   private $error_description = '';
+    public $status = 400;
 
-   protected function getErrorDescription()
-   {
-       return $this->error_description;
-   }
+    private $error = '';
+
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    public function setError(string $error)
+    {
+        $this->error = $error;
+
+        return $this;
+    }
 }
