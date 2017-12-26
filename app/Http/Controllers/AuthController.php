@@ -23,6 +23,9 @@ class AuthController extends Controller
     {
         $login = $request->input('login');
         $user = $this->userService->userByLoginOrEmail($login);
+
+        $user->token()->update($this->tokenService->generateTokens());
+
         $token = $user->token;
 
         return new AuthResource($token);
