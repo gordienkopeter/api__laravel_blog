@@ -31,7 +31,7 @@ class AuthController extends Controller
     public function register(AuthRegisterRequest $request)
     {
         $user = $this->userService->create($request->all());
-        $token = $user->token()->create($user);
+        $token = $user->token()->create($this->tokenService->generateTokens());
 
         return new AuthResource($token);
     }
