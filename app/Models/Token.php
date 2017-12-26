@@ -22,6 +22,6 @@ class Token extends Model
 
     public function getExpireTokenAttribute($value)
     {
-        return time($value) * 1000;
+        return strtotime( $value) * 1000;
     }
 }
