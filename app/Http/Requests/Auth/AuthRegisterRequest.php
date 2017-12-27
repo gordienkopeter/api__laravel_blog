@@ -3,12 +3,12 @@
 namespace App\Http\Requests\Auth;
 
 use App\Models\User;
-use App\Traits\FailedValidationBaseTrait;
+use App\Traits\FormRequestTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AuthRegisterRequest extends FormRequest
 {
-    use FailedValidationBaseTrait;
+    use FormRequestTrait;
 
     /**
      * Determine if the user is authorized to make this request.

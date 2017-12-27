@@ -34,7 +34,7 @@ class Handler extends ExceptionHandler
      *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
+     * @param  \Exception $exception
      * @return void
      */
     public function report(Exception $exception)
@@ -45,8 +45,8 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Exception $exception
      * @return \Illuminate\Http\Response
      */
     public function render($request, Exception $exception)
@@ -56,10 +56,13 @@ class Handler extends ExceptionHandler
 
     protected function invalidJson($request, ValidationException $exception)
     {
-        return response()->json([
-            'error' => $exception->getError(),
-            'error_description' => $exception->errors(),
-        ], $exception->status);
+        return response()->json(
+            [
+                'error' => $exception->getError(),
+                'error_description' => $exception->errors(),
+            ],
+            $exception->status
+        );
     }
 
     protected function unauthenticated($request, AuthenticationException $exception)
@@ -67,7 +70,7 @@ class Handler extends ExceptionHandler
         return response()->json(
             [
                 'error' => ValidationBaseErrorConstants::INVALID_CLIENT,
-                'error_description' => $exception->getMessage(),
+                'error_description' => ValidationBaseErrorConstants::INVALID_CLIENT_DESCRIPTION,
             ],
             401
         );

@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Models\Token;
 use App\Models\User;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
@@ -20,19 +21,9 @@ class TokenService
        return Crypt::encryptString(Str::random(33));
     }
 
-    public function generateExpireToken(): string
+    public function generateExpireToken(int $minutes = 0): Carbon
     {
-       return date(
-           'Y-n-j G:i',
-           mktime(
-               date('G'),
-               date('i') + env('AUTH_EXPIRED'),
-               0,
-               date('m'),
-               date('d'),
-               date('Y')
-           )
-       );
+       return Carbon::now()->addMinutes($minutes);
     }
 
     public function generateTokens(): array
@@ -40,7 +31,7 @@ class TokenService
         return [
             'access_token' => $this->generateToken(),
             'refresh_token' => $this->generateToken(),
-            'expire_token' => $this->generateExpireToken()
+            'expire_token' => $this->generateExpireToken(env('AUTH_EXPIRED'))->format('Y-m-d H:i:s')
         ];
     }
 

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use App\Traits\ModelTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -18,10 +17,5 @@ class Token extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function getExpireTokenAttribute($value)
-    {
-        return strtotime( $value) * 1000;
     }
 }

@@ -17,7 +17,7 @@ class AuthResource extends Resource
         return [
             'access_token' => $this->access_token,
             'refresh_token' => $this->refresh_token,
-            'expire_token' => $this->expire_token,
+            'expire_token' => strtotime($this->expire_token),
             'token_type' => $this->token_type,
         ];
     }

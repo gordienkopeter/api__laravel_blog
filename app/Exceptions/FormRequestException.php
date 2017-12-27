@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Validation\ValidationException;
 
-class ValidationBaseException extends ValidationException
+class FormRequestException extends ValidationException
 {
     public $status = 400;
 
