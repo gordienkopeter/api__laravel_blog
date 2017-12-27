@@ -35,6 +35,14 @@ class TokenService
         ];
     }
 
+    public function generateEmptyTokens(): array
+    {
+        return [
+            'access_token' => '',
+            'refresh_token' => ''
+        ];
+    }
+
     public function show(string $id)
     {
         return Token::where('id', $id)
@@ -47,9 +55,12 @@ class TokenService
             ->first();
     }
 
-    public function refreshToken(string $refresh_token)
+    public function refreshToken(string $access_token, string $refresh_token)
     {
-        $token = Token::where('refresh_token', $refresh_token)->first();
+        $token = Token::where('access_token', $access_token)
+            ->where('refresh_token', $refresh_token)
+            ->first();
+
         $token->update($this->generateTokens());
 
         return $token;

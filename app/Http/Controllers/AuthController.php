@@ -42,6 +42,9 @@ class AuthController extends Controller
 
     public function refreshToken(AuthRefreshTokenRequest $request)
     {
-
+        return new AuthResource($this->tokenService->refreshToken(
+            $request->bearerToken(),
+            $request->input('refresh_token')
+        ));
     }
 }

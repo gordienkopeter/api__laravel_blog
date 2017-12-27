@@ -17,8 +17,11 @@ class UserPassword implements Rule
     public function passes($attribute, $value)
     {
         $user = Auth::user();
-        return $user->hashed_password === app('App\Services\UsersService')->preparePassword($user, $value);
+
+        return $user->password === app('App\Services\UsersService')
+                ->preparePassword($user, $value);
     }
+
     /**
      * Get the validation error message.
      *
