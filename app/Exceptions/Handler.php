@@ -6,7 +6,6 @@ use App\Helpers\Constants\ValidationBaseErrorConstants;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Validation\ValidationException;
 
 class Handler extends ExceptionHandler
 {
@@ -52,17 +51,6 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
-    }
-
-    protected function invalidJson($request, ValidationException $exception)
-    {
-        return response()->json(
-            [
-                'error' => $exception->getError(),
-                'error_description' => $exception->errors(),
-            ],
-            $exception->status
-        );
     }
 
     protected function unauthenticated($request, AuthenticationException $exception)

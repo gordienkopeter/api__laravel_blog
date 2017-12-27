@@ -21,4 +21,15 @@ class FormRequestException extends ValidationException
 
         return $this;
     }
+
+    public function render($request)
+    {
+        return response()->json(
+            [
+                'error' => self::getError(),
+                'error_description' => self::errors(),
+            ],
+            $this->status
+        );
+    }
 }
