@@ -3,8 +3,6 @@
 namespace App\Http\Middleware;
 
 use App\Exceptions\ExpiredTokenException;
-use App\Models\Token;
-use App\Models\User;
 use Closure;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Auth;
