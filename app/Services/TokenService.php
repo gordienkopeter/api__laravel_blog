@@ -3,13 +3,14 @@
 namespace App\Services;
 
 
+use App\Helpers\Contracts\TokenServiceContract;
 use App\Models\Token;
 use App\Models\User;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
-class TokenService
+class TokenService implements TokenServiceContract
 {
     public function create(User $user): Token
     {

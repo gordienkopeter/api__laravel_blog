@@ -5,7 +5,7 @@ namespace App\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
-class UserPassword implements Rule
+class UserChangePasswordRule implements Rule
 {
     /**
      * Determine if the validation rule passes.

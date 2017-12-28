@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\UserPassword;
+use App\Rules\UserChangePasswordRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ChangePasswordRequest extends FormRequest
@@ -25,7 +25,7 @@ class ChangePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'password' => ['required', 'string', new UserPassword],
+            'password' => ['required', 'string', new UserChangePasswordRule],
             'new_password' => 'required|string|min:6|different:password',
             'confirm_new_password' => 'required|string|min:6|same:new_password'
         ];

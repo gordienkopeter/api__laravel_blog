@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Contracts\TokenServiceContract;
 use App\Helpers\Contracts\UserServiceContract;
-use App\Http\Requests\Auth\AuthRefreshTokenRequest;
-use App\Http\Requests\Auth\AuthRegisterRequest;
-use App\Http\Requests\Auth\AuthLoginRequest;
+use App\Http\Requests\AuthRefreshTokenRequest;
+use App\Http\Requests\AuthRegisterRequest;
+use App\Http\Requests\AuthLoginRequest;
 use App\Http\Resources\AuthResource;
 
 class AuthController extends Controller

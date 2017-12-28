@@ -2,17 +2,17 @@
 
 namespace App\Services;
 
-use App\Interfaces\IUserService;
-use App\Models\Token;
+use App\Helpers\Contracts\TokenServiceContract;
+use App\Helpers\Contracts\UserServiceContract;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Str;
 
-class UserService implements IUserService
+class UserService implements UserServiceContract
 {
     protected $tokenService;
 
-    public function __construct(TokenService $tokenService)
+    public function __construct(TokenServiceContract $tokenService)
     {
         $this->tokenService = $tokenService;
     }
