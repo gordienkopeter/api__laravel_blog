@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Auth;
+use App\Services\PostService;
 
-class PostController extends Controller
+class PostController extends BaseController
 {
-    public function __construct()
+    public function __construct(PostService $service)
     {
-    }
-
-    public function all()
-    {
-        dd(Auth::user());
+        $this->service = $service;
     }
 }
