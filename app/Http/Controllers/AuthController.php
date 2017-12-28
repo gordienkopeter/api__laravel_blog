@@ -2,19 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Contracts\TokenServiceContract;
+use App\Helpers\Contracts\UserServiceContract;
 use App\Http\Requests\Auth\AuthRefreshTokenRequest;
 use App\Http\Requests\Auth\AuthRegisterRequest;
 use App\Http\Requests\Auth\AuthLoginRequest;
 use App\Http\Resources\AuthResource;
-use App\Services\TokenService;
-use App\Services\UserService;
 
 class AuthController extends Controller
 {
     protected $userService;
     protected $tokenService;
 
-    public function __construct(UserService $userService, TokenService $tokenService)
+    public function __construct(
+        UserServiceContract $userService,
+        TokenServiceContract $tokenService
+    )
     {
         $this->userService = $userService;
         $this->tokenService = $tokenService;
