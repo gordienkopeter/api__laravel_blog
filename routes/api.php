@@ -24,7 +24,6 @@ Route::group(
 
 Route::group(
     [
-        'middleware' => ['auth'],
         'prefix' => 'v1'
     ],
     function () {
@@ -34,6 +33,10 @@ Route::group(
             ],
             function () {
                 Route::get('', 'PostController@all');
+                Route::get('{id}', 'PostController@show');
+                Route::post('', 'PostController@create');
+                Route::put('{id}', 'PostController@update');
+                Route::delete('{id}', 'PostController@delete');
             }
         );
     }
