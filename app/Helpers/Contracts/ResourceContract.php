@@ -3,7 +3,7 @@
 namespace App\Helpers\Contracts;
 
 
-interface BaseResourceContract
+interface ResourceContract
 {
     /**
      * BaseResourceContract constructor.
@@ -12,4 +12,12 @@ interface BaseResourceContract
      * @param array $relationship_ids
      */
      public function __construct($resource, array $relationship_ids = []);
+
+    /**
+     * Transform the resource collection into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function toArray($request);
 }

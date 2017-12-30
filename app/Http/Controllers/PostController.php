@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\Contracts\BaseServiceContract;
+use App\Helpers\Contracts\ServiceContract;
 use App\Services\PostService;
 use Illuminate\Support\Facades\App;
 
@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\App;
  * Contextual binding dependency injection
  */
 App::when(PostController::class)
-    ->needs(BaseServiceContract::class)
+    ->needs(ServiceContract::class)
     ->give(PostService::class);
 
-class PostController extends BaseController
+class PostController extends Controller
 {
     //
 }

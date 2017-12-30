@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Helpers\Contracts\BaseModelContract;
+use App\Helpers\Contracts\ModelContract;
 use App\Models\Post;
 use Illuminate\Support\Facades\App;
 
@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\App;
  * Contextual binding dependency injection
  */
 App::when(PostService::class)
-    ->needs(BaseModelContract::class)
+    ->needs(ModelContract::class)
     ->give(Post::class);
 
-class PostService extends BaseService
+class PostService extends Service
 {
     //
 }

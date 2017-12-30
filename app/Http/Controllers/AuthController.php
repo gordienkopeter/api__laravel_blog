@@ -8,6 +8,7 @@ use App\Http\Requests\AuthRefreshTokenRequest;
 use App\Http\Requests\AuthRegisterRequest;
 use App\Http\Requests\AuthLoginRequest;
 use App\Http\Resources\AuthResource;
+use Illuminate\Routing\Controller;
 
 class AuthController extends Controller
 {

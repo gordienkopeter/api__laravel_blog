@@ -2,7 +2,7 @@
 
 namespace App\Helpers\Contracts;
 
-interface BaseModelContract
+interface ModelContract
 {
     /**
      * @return string

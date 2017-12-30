@@ -4,14 +4,14 @@ namespace App\Helpers\Contracts;
 
 use Illuminate\Support\Collection;
 
-interface BaseServiceContract
+interface ServiceContract
 {
     /**
      * BaseServiceContract constructor.
      *
-     * @param BaseModelContract $model
+     * @param ModelContract $model
      */
-    public function __construct(BaseModelContract $model);
+    public function __construct(ModelContract $model);
 
     /**
      * @param array $data
@@ -22,22 +22,22 @@ interface BaseServiceContract
     /**
      * @param array $data
      * @param int $id
-     * @return BaseModelContract
+     * @return ModelContract
      */
-    public function show(array $data, int $id): BaseModelContract;
+    public function show(array $data, int $id): ModelContract;
 
     /**
      * @param array $data
      * @return mixed
      */
-    public function create(array $data): BaseModelContract;
+    public function create(array $data): ModelContract;
 
     /**
      * @param array $data
      * @param int $id
-     * @return BaseModelContract
+     * @return ModelContract
      */
-    public function update(array $data, int $id): BaseModelContract;
+    public function update(array $data, int $id): ModelContract;
 
     /**
      * @param array $data

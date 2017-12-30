@@ -2,10 +2,10 @@
 
 namespace App\Http\Resources;
 
-use App\Helpers\Contracts\BaseResourceContract;
-use Illuminate\Http\Resources\Json\Resource;
+use App\Helpers\Contracts\ResourceContract;
+use Illuminate\Http\Resources\Json\Resource as IlluminateResource;
 
-class BaseResource extends Resource implements BaseResourceContract
+class Resource extends IlluminateResource implements ResourceContract
 {
     private $relationship_ids;
 
@@ -16,12 +16,6 @@ class BaseResource extends Resource implements BaseResourceContract
         $this->relationship_ids = $relationship_ids;
     }
 
-    /**
-     * Transform the resource collection into an array.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
-     */
     public function toArray($request)
     {
         return [
