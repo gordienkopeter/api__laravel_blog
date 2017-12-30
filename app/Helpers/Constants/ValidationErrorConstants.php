@@ -2,7 +2,7 @@
 
 namespace App\Helpers\Constants;
 
-final class ValidationBaseErrorConstants
+final class ValidationErrorConstants
 {
     const INVALID_CLIENT = 'invalid_client';
     const INVALID_REQUEST = 'invalid_request';

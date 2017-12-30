@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Helpers\Constants\ValidationBaseErrorConstants;
+use App\Helpers\Constants\ValidationErrorConstants;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -57,8 +57,8 @@ class Handler extends ExceptionHandler
     {
         return response()->json(
             [
-                'error' => ValidationBaseErrorConstants::INVALID_CLIENT,
-                'error_description' => ValidationBaseErrorConstants::INVALID_CLIENT_DESCRIPTION,
+                'error' => ValidationErrorConstants::INVALID_CLIENT,
+                'error_description' => ValidationErrorConstants::INVALID_CLIENT_DESCRIPTION,
             ],
             401
         );

@@ -2,7 +2,7 @@
 
 namespace App\Exceptions;
 
-use App\Helpers\Constants\ValidationBaseErrorConstants;
+use App\Helpers\Constants\ValidationErrorConstants;
 use Exception;
 
 class ExpiredTokenException extends Exception
@@ -13,8 +13,8 @@ class ExpiredTokenException extends Exception
     private $error_description;
 
     public function __construct(
-        string $message = ValidationBaseErrorConstants::EXPIRED_TOKEN,
-        string $error_description = ValidationBaseErrorConstants::EXPIRED_TOKEN_DESCRIPTION
+        string $message = ValidationErrorConstants::EXPIRED_TOKEN,
+        string $error_description = ValidationErrorConstants::EXPIRED_TOKEN_DESCRIPTION
     )
     {
         parent::__construct($message);
