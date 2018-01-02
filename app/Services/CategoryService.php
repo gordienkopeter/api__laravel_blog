@@ -9,9 +9,7 @@ use Illuminate\Support\Facades\App;
 /**
  * Contextual binding dependency injection
  */
-App::when(CategoryService::class)
-    ->needs(ModelContract::class)
-    ->give(Category::class);
+App::addContextualBinding(CategoryService::class, ModelContract::class, Category::class);
 
 class CategoryService extends Service
 {
