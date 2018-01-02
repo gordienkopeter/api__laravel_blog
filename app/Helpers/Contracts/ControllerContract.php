@@ -2,6 +2,7 @@
 
 namespace App\Helpers\Contracts;
 
+use App\Exceptions\NotFoundException;
 use Illuminate\Http\Request;
 
 interface ControllerContract
@@ -22,6 +23,7 @@ interface ControllerContract
      * @param Request $request
      * @param int $id
      * @return ResourceContract
+     * @throws NotFoundException
      */
     public function show(Request $request, int $id): ResourceContract;
 

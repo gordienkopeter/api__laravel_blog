@@ -3,6 +3,8 @@
 namespace App\Helpers\Contracts;
 
 
+use App\Exceptions\NotFoundException;
+
 interface ResourceContract
 {
     /**
@@ -18,6 +20,7 @@ interface ResourceContract
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
+     * @throws NotFoundException
      */
     public function toArray($request);
 }

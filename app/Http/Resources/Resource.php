@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Exceptions\NotFoundException;
 use App\Helpers\Contracts\ResourceContract;
 use Illuminate\Http\Resources\Json\Resource as IlluminateResource;
 
@@ -18,6 +19,10 @@ class Resource extends IlluminateResource implements ResourceContract
 
     public function toArray($request)
     {
+        if (is_null($this->resource)) {
+            throw new NotFoundException();
+        }
+
         return [
             'item' => $this->resource,
             'relationships' => $this->relationship_ids,
