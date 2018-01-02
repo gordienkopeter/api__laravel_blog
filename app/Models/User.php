@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Helpers\Contracts\ModelContract;
 use App\Traits\ModelTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements ModelContract
 {
     use ModelTrait;
 
@@ -13,6 +14,15 @@ class User extends Authenticatable
     protected $guarded = ['id'];
 
     public $timestamps = true;
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'salt',
+    ];
 
     public function token()
     {

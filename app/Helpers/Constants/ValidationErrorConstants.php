@@ -10,4 +10,8 @@ final class ValidationErrorConstants
 
     const INVALID_CLIENT_DESCRIPTION = 'unauthenticated';
     const EXPIRED_TOKEN_DESCRIPTION = 'expired token';
+
+    private function __construct()
+    {
+    }
 }

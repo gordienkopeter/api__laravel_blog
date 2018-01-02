@@ -39,5 +39,18 @@ Route::group(
                 Route::delete('{id}', 'PostController@delete');
             }
         );
+
+        Route::group(
+            [
+                'prefix' => 'categories'
+            ],
+            function () {
+                Route::get('', 'CategoryController@all');
+                Route::get('{id}', 'CategoryController@show');
+                Route::post('', 'CategoryController@create');
+                Route::put('{id}', 'CategoryController@update');
+                Route::delete('{id}', 'CategoryController@delete');
+            }
+        );
     }
 );
