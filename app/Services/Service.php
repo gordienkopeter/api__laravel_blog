@@ -21,26 +21,33 @@ class Service implements ServiceContract
         return $this->model->get();
     }
 
-    public function show(array $data, int $id): ModelContract
+    public function show(array $data, int $id): ?ModelContract
     {
         return $this->model->find($id);
     }
 
-    public function create(array $data): ModelContract
+    public function create(array $data): ?ModelContract
     {
         return $this->model->create($data);
     }
 
-    public function update(array $data, int $id): ModelContract
+    public function update(array $data, int $id): ?ModelContract
     {
         $model = $this->show([], $id);
-        $model->update($data);
+
+        if ($model) {
+            $model->update($data);
+        }
 
         return $model;
     }
 
     public function delete(array $data, int $id): bool
     {
-        return App::call([$this->model->getClass(), 'all']);
+        $model = $this->show([], $id);
+
+        if ($model) {
+            $model->delete();
+        }
     }
 }

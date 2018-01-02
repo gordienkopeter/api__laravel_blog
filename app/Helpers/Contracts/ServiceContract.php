@@ -24,20 +24,20 @@ interface ServiceContract
      * @param int $id
      * @return ModelContract
      */
-    public function show(array $data, int $id): ModelContract;
+    public function show(array $data, int $id): ?ModelContract;
 
     /**
      * @param array $data
      * @return mixed
      */
-    public function create(array $data): ModelContract;
+    public function create(array $data): ?ModelContract;
 
     /**
      * @param array $data
      * @param int $id
      * @return ModelContract
      */
-    public function update(array $data, int $id): ModelContract;
+    public function update(array $data, int $id): ?ModelContract;
 
     /**
      * @param array $data
