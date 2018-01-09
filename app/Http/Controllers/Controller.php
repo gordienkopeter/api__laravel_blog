@@ -8,17 +8,20 @@ use App\Helpers\Contracts\ResourceContract;
 use App\Helpers\Contracts\ServiceContract;
 use App\Http\Resources\Collection;
 use App\Http\Resources\Resource;
-use Illuminate\Foundation\Bus\DispatchesJobs;
+use App\Services\Service;
+use App\Traits\FormRequestTrait;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Validator;
 
-abstract class Controller extends BaseController implements ControllerContract
+abstract class Controller implements ControllerContract
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    use FormRequestTrait;
 
-    public $service;
+    /**
+     * @var Service
+     */
+    protected $service;
 
     public function __construct(ServiceContract $service)
     {
@@ -34,6 +37,8 @@ abstract class Controller extends BaseController implements ControllerContract
 
     public function show(Request $request, int $id): ResourceContract
     {
+        $this->validateIdExists($id);
+
         $resource = $this->service->show($request->all(), $id);
 
         return new Resource($resource);
@@ -48,6 +53,8 @@ abstract class Controller extends BaseController implements ControllerContract
 
     public function update(Request $request, int $id): ResourceContract
     {
+        $this->validateIdExists($id);
+
         $resource = $this->service->update($request->all(), $id);
 
         return new Resource($resource);
@@ -55,6 +62,23 @@ abstract class Controller extends BaseController implements ControllerContract
 
     public function delete(Request $request, int $id): bool
     {
+        $this->validateIdExists($id);
+
         return $this->service->delete($request->all(), $id);
+    }
+
+    public function validate(array $data, array $rules, array $messages = [], array $attr = []): void
+    {
+        if (($validator = Validator::make($data, $rules, $messages, $attr)) && $validator->fails()) {
+            $this->failedValidation($validator);
+        }
+    }
+
+    public function validateIdExists(int $id): void
+    {
+        $this->validate(
+            ['id' => $id],
+            ['id' => 'exists:'. App::call([$this->service->model->getClass(), 'getTableName'])]
+        );
     }
 }

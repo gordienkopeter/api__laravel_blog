@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Category;
 
-use App\Models\Category;
 use App\Traits\FormRequestTrait;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCategoryRequest extends FormRequest
+class ShowCategoryNestedTreeRequest extends FormRequest
 {
     use FormRequestTrait;
     /**
@@ -27,8 +26,8 @@ class CreateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:' . Category::getTableName(),
-            'parent_id' => 'int',
+            'right' => 'int',
+            'left' => 'int',
         ];
     }
 }

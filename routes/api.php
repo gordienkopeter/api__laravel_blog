@@ -33,10 +33,18 @@ Route::group(
             ],
             function () {
                 Route::get('', 'PostController@all');
-                Route::get('{id}', 'PostController@show');
                 Route::post('', 'PostController@create');
-                Route::put('{id}', 'PostController@update');
-                Route::delete('{id}', 'PostController@delete');
+
+                Route::group(
+                    [
+                        'prefix' => '{id}'
+                    ],
+                    function () {
+                        Route::get('', 'PostController@show');
+                        Route::put('', 'PostController@update');
+                        Route::delete('', 'PostController@delete');
+                    }
+                );
             }
         );
 
@@ -45,11 +53,25 @@ Route::group(
                 'prefix' => 'categories'
             ],
             function () {
+
                 Route::get('', 'CategoryController@all');
-                Route::get('{id}', 'CategoryController@show');
                 Route::post('', 'CategoryController@create');
-                Route::put('{id}', 'CategoryController@update');
-                Route::delete('{id}', 'CategoryController@delete');
+
+                Route::get('tree', 'CategoryController@showNestedTree');
+                Route::get('search', 'CategoryController@searchByName');
+
+                Route::group(
+                    [
+                        'prefix' => '{id}'
+                    ],
+                    function () {
+                        Route::get('', 'CategoryController@show');
+                        Route::put('', 'CategoryController@update');
+                        Route::delete('', 'CategoryController@delete');
+
+                        Route::get('tree', 'CategoryController@showNestedTreeById');
+                    }
+                );
             }
         );
     }

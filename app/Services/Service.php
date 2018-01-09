@@ -3,15 +3,17 @@
 namespace App\Services;
 
 use App\Helpers\Contracts\ServiceContract;
-use App\Helpers\Contracts\ModelContract;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\App;
 
-class Service implements ServiceContract
+abstract class Service implements ServiceContract
 {
+    /**
+     * @var Model
+     */
     public $model;
 
-    public function __construct(ModelContract $model)
+    public function __construct(Model $model)
     {
         $this->model = $model;
     }
@@ -21,19 +23,19 @@ class Service implements ServiceContract
         return $this->model->get();
     }
 
-    public function show(array $data, int $id): ?ModelContract
+    public function show(array $data, int $id): ?Model
     {
         return $this->model->find($id);
     }
 
-    public function create(array $data): ?ModelContract
+    public function create(array $data): Model
     {
         return $this->model->create($data);
     }
 
-    public function update(array $data, int $id): ?ModelContract
+    public function update(array $data, int $id): ?Model
     {
-        $model = $this->show([], $id);
+        $model = $this->model->find($id);
 
         if ($model) {
             $model->update($data);
@@ -44,7 +46,7 @@ class Service implements ServiceContract
 
     public function delete(array $data, int $id): bool
     {
-        $model = $this->show([], $id);
+        $model = $this->model->find($id);
 
         if ($model) {
             $model->delete();

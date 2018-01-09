@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use App\Helpers\Contracts\ModelContract;
 use App\Traits\ModelTrait;
-use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model implements ModelContract
+class Category extends \Baum\Node
 {
     use ModelTrait;
 
     protected $table = 'categories';
-    protected $guarded = ['id'];
+
+    protected $leftColumn = 'left';
+    protected $rightColumn = 'right';
 
     public $timestamps = true;
 }

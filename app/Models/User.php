@@ -6,7 +6,7 @@ use App\Helpers\Contracts\ModelContract;
 use App\Traits\ModelTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements ModelContract
+class User extends Authenticatable
 {
     use ModelTrait;
 

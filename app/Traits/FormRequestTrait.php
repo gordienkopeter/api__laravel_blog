@@ -9,11 +9,13 @@ use Illuminate\Contracts\Validation\Validator;
 
 trait FormRequestTrait
 {
-    protected function failedValidation(Validator $validator)
+    /**
+     * @param Validator $validator
+     * @throws FormRequestException
+     */
+    public function failedValidation(Validator $validator): void
     {
         throw (new FormRequestException($validator))
-            ->setError(ValidationErrorConstants::INVALID_REQUEST)
-            ->errorBag($this->errorBag)
-            ->redirectTo($this->getRedirectUrl());
+            ->setError(ValidationErrorConstants::INVALID_REQUEST);
     }
 }

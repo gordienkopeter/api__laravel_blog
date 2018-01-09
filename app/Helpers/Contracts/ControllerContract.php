@@ -2,6 +2,7 @@
 
 namespace App\Helpers\Contracts;
 
+use App\Exceptions\FormRequestException;
 use App\Exceptions\NotFoundException;
 use Illuminate\Http\Request;
 
@@ -46,4 +47,18 @@ interface ControllerContract
      * @return bool
      */
     public function delete(Request $request, int $id): bool;
+
+    /**
+     * @param array $data
+     * @param array $rules
+     * @param array $messages
+     * @param array $attr
+     * @throws FormRequestException
+     */
+    public function validate(array $data, array $rules, array $messages = [], array $attr = []): void;
+
+    /**
+     * @param int $id
+     */
+    public function validateIdExists(int $id): void;
 }
