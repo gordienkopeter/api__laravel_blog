@@ -3,8 +3,9 @@
 namespace App\Models;
 
 use App\Traits\ModelTrait;
+use \Baum\Node;
 
-class Category extends \Baum\Node
+class Category extends Node
 {
     use ModelTrait;
 

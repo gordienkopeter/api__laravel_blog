@@ -53,7 +53,6 @@ Route::group(
                 'prefix' => 'categories'
             ],
             function () {
-
                 Route::get('', 'CategoryController@all');
                 Route::post('', 'CategoryController@create');
 
@@ -66,7 +65,7 @@ Route::group(
                     ],
                     function () {
                         Route::get('', 'CategoryController@show');
-                        Route::put('', 'CategoryController@update');
+                        Route::post('', 'CategoryController@update');
                         Route::delete('', 'CategoryController@delete');
 
                         Route::get('tree', 'CategoryController@showNestedTreeById');
