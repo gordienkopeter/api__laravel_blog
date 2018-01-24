@@ -5,6 +5,7 @@ namespace App\Helpers\Contracts;
 use App\Exceptions\FormRequestException;
 use App\Exceptions\NotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Routing\ControllerDispatcher;
 
 interface ControllerContract
 {
@@ -47,6 +48,17 @@ interface ControllerContract
      * @return bool
      */
     public function delete(Request $request, int $id): bool;
+
+    /**
+     * This method uses for dispatch a request to a given controller and method.
+     *
+     * @see ControllerDispatcher::dispatch
+     *
+     * @param string $method
+     * @param array $parameters
+     * @return mixed
+     */
+    public function callAction(string $method, array $parameters);
 
     /**
      * @param array $data

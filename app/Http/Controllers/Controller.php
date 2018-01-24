@@ -67,6 +67,10 @@ abstract class Controller implements ControllerContract
         return $this->service->delete($request->all(), $id);
     }
 
+    public function callAction(string $method, array $parameters) {
+        return self::$method(...array_values($parameters));
+    }
+
     public function validate(array $data, array $rules, array $messages = [], array $attr = []): void
     {
         if (($validator = Validator::make($data, $rules, $messages, $attr)) && $validator->fails()) {

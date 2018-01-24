@@ -13,7 +13,6 @@ use App\Http\Requests\Category\ShowCategoryNestedTreeRequest;
 use App\Http\Requests\Category\UpdateCategoryRequest;
 use App\Http\Resources\Collection;
 use App\Http\Resources\Resource;
-use App\Services\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 
@@ -25,22 +24,22 @@ App::addContextualBinding(CategoryController::class, ServiceContract::class, Cat
 class CategoryController extends Controller implements CategoryControllerContract
 {
     /**
-     * @var CategoryServiceContract|Service
+     * @var CategoryServiceContract|ServiceContract
      */
     public $service;
 
-    public function create(Request $request): ResourceContract
-    {
-        App::make(CreateCategoryRequest::class);
-
-        return parent::create($request);
-    }
-
-    public function update(Request $request, int $id): ResourceContract
-    {
-        App::make(UpdateCategoryRequest::class);
-
-        return parent::update($request, $id);
+    public function callAction(string $method, array $parameters) {
+        switch ($method) {
+            case 'create':
+                return self::$method(app()->make(CreateCategoryRequest::class));
+            case 'update':
+                return self::$method(
+                    app()->make(UpdateCategoryRequest::class),
+                    array_get($parameters, 'id')
+                );
+            default:
+                return self::$method(...array_values($parameters));
+        }
     }
 
     public function showNestedTree(ShowCategoryNestedTreeRequest $request): CollectionContract
